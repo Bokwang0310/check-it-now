@@ -18,8 +18,11 @@ document.querySelector(".submit-btn").addEventListener("click", () => {
   const movingClasses = localStorage.getItem("movingClasses");
 
   if (!movingClasses) {
+    alert(
+      "이동수업 정보가 저장되어 있지 않아 이동수업 정보를 수집하겠습니다. 띄어쓰기 없이 입력해주세요."
+    );
     const arr = ["A", "B", "C", "D", "E", "F", "G", "H"].map((alphabet) =>
-      prompt(`${alphabet}를 입력`)
+      prompt(`${alphabet} 수업 이름을 입력`)
     );
 
     localStorage.setItem("movingClasses", arr);
