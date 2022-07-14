@@ -14,22 +14,46 @@
       const idInput = document.querySelector(".id-input");
 
       submitBtn.addEventListener("click", () => {
-        console.log("안종언 뭐해");
-        // console.log(idInput.value);
+        const schedule = localStorage.getItem("schedule").split(",");
 
-        console.log(checkClass(new Date()));
+        if (!schedule) {
+          const A = prompt("A를 입력");
+          const B = prompt("B를 입력");
+          const C = prompt("C를 입력");
+          const D = prompt("D를 입력");
+          const E = prompt("E를 입력");
+          const F = prompt("F를 입력");
+          const G = prompt("G를 입력");
+          const H = prompt("H를 입력");
+
+          localStorage.setItem("schedule", [A, B, C, D, E, F, G, H]);
+        }
+
+        const currentDate = new Date();
+        const table = getSchedule(schedule);
+
+        const classNum = checkClass(new Date());
+        const day = getDayByNum(currentDate.getDay());
+
+        console.log(day);
+        console.log(table[day]);
       });
 
-      // 임시로 내 시간표 냅다 박아놓음
-      const getSchedule = () => ({
-        A: "미적분",
-        B: "영독작",
-        C: "물2",
-        D: "화작",
-        E: "지2",
-        F: "기하",
-        G: "플밍",
-        H: "심리",
+      const getDayByNum = (num) => {
+        const currentDate = new Date();
+        if (currentDate.getDay() === 1) return "mon";
+        else if (currentDate.getDay() === 2) return "tue";
+        else if (currentDate.getDay() === 3) return "wen";
+        else if (currentDate.getDay() === 4) return "thu";
+        else return "fri";
+      };
+
+      const getSchedule = ([A, B, C, D, E, F, G, H]) => ({
+        mon: [C, "class", B, E, "class", D, A],
+        tue: [F, D, E, H, "class", A, B],
+        wen: ["class", C, "class", "class", "class", "class"],
+        thu: ["class", F, E, "class", "class", B, G],
+        fri: [G, D, "class", A, H, C, F],
       });
 
       const makeDates = (date, [hourA, minA], [hourB, minB]) => {
