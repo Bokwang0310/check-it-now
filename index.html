@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>안종언의 출⭐결 시스템^^</title>
+  </head>
+  <body>
+    <input class="id-input" type="text" placeholder="학번을 입력해줘" />
+    <button class="submit-btn">가보자고</button>
+    <script>
+      const submitBtn = document.querySelector(".submit-btn");
+      const idInput = document.querySelector(".id-input");
+
+      submitBtn.addEventListener("click", () => {
+        console.log("안종언 뭐해");
+        // console.log(idInput.value);
+
+        console.log(checkClass(new Date()));
+      });
+
+      // 임시로 내 시간표 냅다 박아놓음
+      const getSchedule = () => ({
+        A: "미적분",
+        B: "영독작",
+        C: "물2",
+        D: "화작",
+        E: "지2",
+        F: "기하",
+        G: "플밍",
+        H: "심리",
+      });
+
+      const makeDates = (date, [hourA, minA], [hourB, minB]) => {
+        a = new Date(date);
+        a.setHours(hourA);
+        a.setMinutes(minA);
+
+        b = new Date(date);
+        b.setHours(hourB);
+        b.setMinutes(minB);
+
+        return [new Date(a), new Date(b)];
+      };
+
+      const getAllClasses = () => {
+        const currentDate = new Date();
+        const one = makeDates(currentDate, [8, 31], [9, 30]);
+        const two = makeDates(currentDate, [9, 31], [10, 30]);
+        const three = makeDates(currentDate, [10, 31], [11, 30]);
+        const four = makeDates(currentDate, [11, 31], [12, 30]);
+        const five = makeDates(currentDate, [13, 31], [14, 30]);
+        const six = makeDates(currentDate, [14, 31], [15, 30]);
+        const seven = makeDates(currentDate, [15, 31], [16, 30]);
+
+        return [one, two, three, four, five, six, seven];
+      };
+
+      const checkClass = (date) => {
+        const [one, two, three, four, five, six, seven] = getAllClasses();
+
+        if (one[0] <= date <= one[1]) return 1;
+        else if (two[0] <= date <= two[1]) return 2;
+        else if (three[0] <= date <= three[1]) return 3;
+        else if (four[0] <= date <= four[1]) return 4;
+        else if (five[0] <= date <= five[1]) return 5;
+        else if (six[0] <= date <= six[1]) return 6;
+        else if (seven[0] <= date <= seven[1]) return 7;
+      };
+    </script>
+  </body>
+</html>
+
+<!-- 
+1교시 8시 31분 ~ 9시 반
+2교시 9:31 ~ 10:30
+3-> 10:31 ~ 11;30
+4 -> 11;31 ~ 12:25
+점심
+5교시 1;31 2;30
+6-> 2;31 3;30
+7-> 3;31 4;30 
+-->
