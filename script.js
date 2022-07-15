@@ -10,6 +10,18 @@ if (!localStorage.getItem("board")) {
   localStorage.setItem("board", "");
 }
 
+const list = document.querySelector(".list");
+
+{
+  let board = localStorage.getItem("board").split(",");
+  let texts = board.map((item) => document.createTextNode(item));
+  let lis = board.map(() => document.createElement("li"));
+
+  lis = lis.map((li, i) => li.appendChild(texts[i]));
+
+  lis.forEach((li) => list.appendChild(li));
+}
+
 const URLSearch = new URLSearchParams(location.search);
 // 쿼리스트링으로 반을 받음
 const classRoomName = URLSearch.get("class");
@@ -39,7 +51,9 @@ document.querySelector(".submit-btn").addEventListener("click", () => {
 
   const subject = schedule[day][classNum - 1];
   console.log(subject);
-  console.log(classRooms[classRoomName].includes(subject));
+  const bool = classRooms[classRoomName].includes(subject);
+
+  if (!bool) return 0;
 
   const newOne = `${
     currentDate.getMonth() + 1
@@ -49,7 +63,16 @@ document.querySelector(".submit-btn").addEventListener("click", () => {
   if (!board.includes(newOne)) {
     if (!board) board = newOne;
     else board.push(newOne);
+  } else {
+    return 0;
   }
 
   localStorage.setItem("board", board);
+
+  let texts = board.map((item) => document.createTextNode(item));
+  let lis = board.map(() => document.createElement("li"));
+
+  lis = lis.map((li, i) => li.appendChild(texts[i]));
+
+  lis.forEach((li) => list.appendChild(li));
 });
