@@ -69,10 +69,5 @@ document.querySelector(".submit-btn").addEventListener("click", () => {
 
   localStorage.setItem("board", board);
 
-  let texts = board.map((item) => document.createTextNode(item));
-  let lis = board.map(() => document.createElement("li"));
-
-  lis = lis.map((li, i) => li.appendChild(texts[i]));
-
-  lis.forEach((li) => list.appendChild(li));
+  location.reload();
 });
