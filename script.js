@@ -52,6 +52,12 @@ document.querySelector(".submit-btn").addEventListener("click", () => {
 
   const subject = schedule[day][classNum - 1];
   console.log(subject);
+
+  if (subject === "class") {
+    alert("교실 수업 시간입니다.");
+    return 0;
+  }
+
   const bool = classRooms[classRoomName].includes(subject);
 
   if (!bool) return 0;
@@ -61,6 +67,7 @@ document.querySelector(".submit-btn").addEventListener("click", () => {
   }${currentDate.getDate()}-${classNum}교시`;
 
   const board = localStorage.getItem("board").split(",");
+
   if (!board.includes(newOne)) {
     if (!board) board = newOne;
     else board.push(newOne);
