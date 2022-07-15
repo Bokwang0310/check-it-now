@@ -14,12 +14,13 @@ const list = document.querySelector(".list");
 
 {
   let board = localStorage.getItem("board").split(",");
-  let texts = board.map((item) => document.createTextNode(item));
-  let lis = board.map(() => document.createElement("li"));
 
-  lis = lis.map((li, i) => li.appendChild(texts[i]));
+  board.forEach((item, i) => {
+    const li = document.createElement("li");
+    li.innerText = item;
 
-  lis.forEach((li) => list.appendChild(li));
+    list.appendChild(li);
+  });
 }
 
 const URLSearch = new URLSearchParams(location.search);
